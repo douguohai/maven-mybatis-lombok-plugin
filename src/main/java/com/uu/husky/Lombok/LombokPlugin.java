@@ -7,7 +7,9 @@ import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * A MyBatis Generator plugin to use Lombok's @Data annoation
@@ -17,13 +19,19 @@ import java.util.List;
  */
 public class LombokPlugin extends PluginAdapter {
 
-    private FullyQualifiedJavaType dataAnnotation;
+    private Set<FullyQualifiedJavaType> fullyQualifiedJavaTypeList;
 
     /**
      * LombokPlugin contructor
      */
     public LombokPlugin() {
-        dataAnnotation = new FullyQualifiedJavaType("lombok.Data");
+        fullyQualifiedJavaTypeList=new HashSet<FullyQualifiedJavaType>();
+        fullyQualifiedJavaTypeList.add(new FullyQualifiedJavaType("lombok.Getter"));
+        fullyQualifiedJavaTypeList.add(new FullyQualifiedJavaType("lombok.Setter"));
+        fullyQualifiedJavaTypeList.add(new FullyQualifiedJavaType("lombok.ToString"));
+        fullyQualifiedJavaTypeList.add(new FullyQualifiedJavaType("lombok.AllArgsConstructor"));
+        fullyQualifiedJavaTypeList.add(new FullyQualifiedJavaType("lombok.NoArgsConstructor"));
+        fullyQualifiedJavaTypeList.add(new FullyQualifiedJavaType("lombok.Builder"));
     }
 
     /**
@@ -122,8 +130,13 @@ public class LombokPlugin extends PluginAdapter {
      * @param topLevelClass
      */
     protected void addDataAnnotation(TopLevelClass topLevelClass) {
-        topLevelClass.addImportedType(dataAnnotation);
-        topLevelClass.addAnnotation("@Data");
+        topLevelClass.addImportedTypes(fullyQualifiedJavaTypeList);
+        topLevelClass.addAnnotation("@Getter");
+        topLevelClass.addAnnotation("@Setter");
+        topLevelClass.addAnnotation("@ToString");
+        topLevelClass.addAnnotation("@AllArgsConstructor");
+        topLevelClass.addAnnotation("@NoArgsConstructor");
+        topLevelClass.addAnnotation("@Builder");
     }
 
 }
