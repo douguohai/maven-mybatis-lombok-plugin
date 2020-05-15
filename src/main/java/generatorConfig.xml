@@ -7,7 +7,7 @@
 	<context id="testTables" targetRuntime="MyBatis3">
 
 
-		<plugin type="com.uu.husky.Lombok.LombokPlugin"></plugin>
+		<plugin type="com.uu.husky.lombok.LombokPlugin"></plugin>
 		<!-- JavaBean 实现 序列化 接口 -->
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin">
 		</plugin>

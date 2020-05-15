@@ -1,4 +1,4 @@
-package com.uu.husky.Lombok;
+package com.uu.husky.lombok;
 
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
@@ -42,13 +42,7 @@ public class LombokPlugin extends PluginAdapter {
         return true;
     }
 
-    /**
-     * Intercepts base record class generation
-     *
-     * @param topLevelClass
-     * @param introspectedTable
-     * @return
-     */
+
     @Override
     public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass,
                                                  IntrospectedTable introspectedTable) {
@@ -56,16 +50,9 @@ public class LombokPlugin extends PluginAdapter {
         return true;
     }
 
-    /**
-     * Intercepts primary key class generation
-     *
-     * @param topLevelClass
-     * @param introspectedTable
-     * @return
-     */
+
     @Override
-    public boolean modelPrimaryKeyClassGenerated(TopLevelClass topLevelClass,
-                                                 IntrospectedTable introspectedTable) {
+    public boolean modelPrimaryKeyClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         addDataAnnotation(topLevelClass);
         return true;
     }
@@ -78,8 +65,7 @@ public class LombokPlugin extends PluginAdapter {
      * @return
      */
     @Override
-    public boolean modelRecordWithBLOBsClassGenerated(
-            TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+    public boolean modelRecordWithBLOBsClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         addDataAnnotation(topLevelClass);
         return true;
     }

@@ -25,16 +25,14 @@ public class MojoStart extends AbstractMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
         List<String> warnings = new ArrayList<String>();
-        boolean overwrite = true;
         File configFile = new File(configFilePath);
         ConfigurationParser cp = new ConfigurationParser(warnings);
         try {
             Configuration config = cp.parseConfiguration(configFile);
-            DefaultShellCallback callback = new DefaultShellCallback(overwrite);
-            MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config,
-                    callback, warnings);
+            DefaultShellCallback callback = new DefaultShellCallback(true);
+            MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
             myBatisGenerator.generate(null);
-        }catch (Exception e ){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
